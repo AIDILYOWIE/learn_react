@@ -1,7 +1,7 @@
 import { AuthLayouts } from "../Components/Layouts/AuthLayouts"
 import { FormRegister } from "../Components/Fragments/FormRegister"
 
-export const Login = () => {
+export const Register = () => {
     return (
         <AuthLayouts title='Register'>
             <FormRegister/>
