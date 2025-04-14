@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Button } from './Components/Elements/Button/Index'
+import { FormLogin } from './Components/Fragments/FormLogin'
+import { Login } from './Pages/login'
 
 function App() {
   return (
-    <Button variant='bg-red'>buy</Button>
+    <Login/>
   )
 }
 
