@@ -1,0 +1,41 @@
+#product-card {
+  background-color: rgb(241, 241, 241);
+  width: 13em;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.438);
+  height: 270px;
+}
+
+#product-header {
+  border-radius: 5px;
+  height: 150px;
+  position: relative;
+}
+
+#product-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#product-btn {
+  border-radius: 5px;
+}
+
+.img-lens {
+    position: absolute;
+    border: 2px solid #333;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    cursor: none;
+    background-repeat: no-repeat;   /* jangan lupa ini */
+  }
+  
+
+.fragment-product-container {
+  /* justify-content: center; */
+  /* align-content: center; */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
