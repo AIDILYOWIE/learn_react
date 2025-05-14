@@ -3,8 +3,7 @@ import { FormLogin } from "./Components/Fragments/FormLogin";
 import { Login } from "./Pages/login";
 import { Register } from "./Pages/register";
 import { createBrowserRouter } from "react-router";
-import { Products } from "./Pages/product";
-import { CardProduct } from "./Components/Fragments/CardProduct";
+import { Product } from "./Pages/product";
 
 const App = createBrowserRouter([
   {
@@ -17,7 +16,7 @@ const App = createBrowserRouter([
   },
   {
     path: "/product",
-    element: <CardProduct />,
+    element: <Product />,
   },
 ]);
 
