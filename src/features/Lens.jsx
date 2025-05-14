@@ -39,24 +39,5 @@ export const LensLogic = ({ src, width, height, zoom = 2 }) => {
       img.removeEventListener("mouseenter", () => lens.style.display = "block");
     };
   }, [src, width, height, zoom]);
-
-  return (
-    <div
-      id="product-header"
-      className="w-full overflow-hidden"
-    //   style={{ width, height }}
-    >
-      <img
-        ref={imgRef}  
-        src={src}
-        width={`${width}%`}
-        height={`${height}%`}
-        alt="product"
-        id="product-img"
-        loading="lazy"
-      />
-      <div ref={lensRef} className="img-lens" style={{ display: "none" }} />
-    </div>
-  );
 };
 
