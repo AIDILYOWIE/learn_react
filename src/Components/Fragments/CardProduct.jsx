@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../../css/product.css";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export const CardProducts = ({ title, price, owner }) => {
+export const CardProducts = ({ children }) => {
   const [isCardHover, setIsCardHover] = useState(false);
 
   return (
@@ -11,14 +12,12 @@ export const CardProducts = ({ title, price, owner }) => {
       onMouseEnter={(e) => setIsCardHover(true)}
       onMouseLeave={(e) => setIsCardHover(!isCardHover)}
     >
-      <Header />
-
-      <Body title={title} price={price} owner={owner} isCardHover={isCardHover}/>
+      {children}
     </div>
   );
 };
 
-const Header = () => {
+const Header = ({img}) => {
   return (
     <div id="product-header" className="w-full overflow-hidden">
       <img
@@ -31,33 +30,38 @@ const Header = () => {
   );
 };
 
-const Body = ({title, price, owner, isCardHover}) => {
+const Body = ({ title, price, owner, isCardHover, handleAddToCart, id }) => {
   return (
     <>
-      <div className="w-full flex flex-col">
+      <div className="w-full flex flex-col gap-1">
         <h3 id="product-title" className=" font-bold text-stone-900">
           {title}
         </h3>
         <h6 className="font-light text-sm tracking-wider">{owner}</h6>
-        <div className="w-full flex mt-1">
-          {isCardHover ? (
-            <button
-              id="product-btn"
-              className="px-5 bg-blue-600 text-white font-normal py-1"
-            >
-              Buy <span className=" ml-1 font-normal">{price}</span>
+        <div className="w-full grid grid-cols-3">
+          <div className="w-full flex text-[15px] col-span-2">
+            {isCardHover ? (
+              <button
+                id="product-btn"
+                className=" px-5 bg-blue-600 text-white font-normal py-1 flex"
+              >
+              <span className="font-normal">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}</span>
+              </button>
+            ) : (
+              <h3 className=" font-bold text-stone-900">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})} </h3>
+            )}
+          </div>
+
+          <div className="flex justify-end w-full">
+            <button className=" cursor-pointer" onClick={() => handleAddToCart(id)}>
+              <ShoppingCartIcon />
             </button>
-          ) : (
-            <h3 className=" font-bold text-stone-900">{price}</h3>
-          )}
+          </div>
         </div>
       </div>
     </>
   );
 };
 
-
-CardProducts.Header = Header
-CardProducts.Body = Body
-
-
+CardProducts.Header = Header;
+CardProducts.Body = Body;
