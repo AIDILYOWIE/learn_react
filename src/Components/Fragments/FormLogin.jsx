@@ -25,9 +25,9 @@ export const FormLogin = () => {
   };
 
   // useRef
-  const emailRef = useRef(null);
+  const usernameRef = useRef(null);
   useEffect(() => {
-    emailRef.current.focus();
+    usernameRef.current.focus();
   }, []);
 
   return (
@@ -39,7 +39,7 @@ export const FormLogin = () => {
         name="username"
         type="text"
         placeholder="username"
-        ref={emailRef}
+        ref={usernameRef}
       ></InputForm>
       <InputForm
         label="Password"

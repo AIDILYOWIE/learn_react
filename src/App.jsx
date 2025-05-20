@@ -4,6 +4,7 @@ import { Login } from "./Pages/login";
 import { Register } from "./Pages/register";
 import { createBrowserRouter } from "react-router";
 import { Product } from "./Pages/product";
+import { Profile } from "./Pages/profile";
 
 const App = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const App = createBrowserRouter([
     path: "/product",
     element: <Product />,
   },
+  {
+    path: "/profile",
+    element: <Profile/>
+  }
 ]);
 
 export default App;
