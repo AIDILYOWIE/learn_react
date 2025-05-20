@@ -1,31 +1,57 @@
-import { useEffect, useRef } from 'react'
-import { Button } from '../Elements/Button/Index'
-import { InputForm } from '../Elements/Input/Index'
+import { useEffect, useRef, useState } from "react";
+import { Button } from "../Elements/Button/Index";
+import { InputForm } from "../Elements/Input/Index";
+import { loginService } from "../../services/api";
 
 export const FormLogin = () => {
-    const handleLogin = (e) => {
-        e.preventDefault() // e.preventDefault() digunakan agar browser tidak terefresh / tidak terender ulang
-        const email =  e.target.email.value
-        const password = e.target.password.value
-        
-        // localstorage digunakan untuk menyimpan data di local
-        localStorage.setItem('email', email)
-        localStorage.setItem('password', password)
+  const [message, setMessage] = useState("");
 
-        return window.location.href = '/product'
-    }
+  const handleLogin = (e) => {
+    e.preventDefault(); // e.preventDefault() digunakan agar browser tidak terefresh / tidak terender ulang
 
-    // useRef 
-    const emailRef = useRef(null)
-    useEffect(() => {
-        emailRef.current.focus()
-    }, [])
+    const dataLogin = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
 
-    return (
-        <form action="" className=' text-start' onSubmit={handleLogin}>
-            <InputForm label="Email" name="email" type="text" placeholder="your email" ref={emailRef}></InputForm>
-            <InputForm label="Password" name="password" type="password" placeholder="your password" ></InputForm>
-            <Button variant="bg-blue-600" type={"submit"}>Login</Button>
-        </form>
-    )
-}
+    loginService(dataLogin, (status, res) => {
+      if (status) {
+        localStorage.setItem('token', res);
+        return window.location.href = "/product"
+      } else {
+        setMessage(res.response.data);
+      }
+    });
+  };
+
+  // useRef
+  const emailRef = useRef(null);
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  return (
+    <>
+
+    <form action="" className=" text-start" onSubmit={handleLogin}>
+      <InputForm
+        label="Username"
+        name="username"
+        type="text"
+        placeholder="username"
+        ref={emailRef}
+      ></InputForm>
+      <InputForm
+        label="Password"
+        name="password"
+        type="password"
+        placeholder="your password"
+      ></InputForm>
+      <Button variant="bg-blue-600" type={"submit"}>
+        Login
+      </Button>
+    </form>
+      {message && <p className="text-center text-red-600 font-normal">{message}</p>}
+          </>
+  );
+};
