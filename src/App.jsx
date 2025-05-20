@@ -5,6 +5,7 @@ import { Register } from "./Pages/register";
 import { createBrowserRouter } from "react-router";
 import { Product } from "./Pages/product";
 import { Profile } from "./Pages/profile";
+import { DetailProduct }  from "./Pages/detailProduct";
 
 const App = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const App = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile/>
+  }, 
+  {
+    path: "/detailProduct/:id",
+    element: <DetailProduct/>
   }
 ]);
 
