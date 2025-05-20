@@ -1,23 +1,26 @@
 import { useState } from "react";
 import "../../css/product.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Link } from "react-router";
 
-export const CardProducts = ({ children }) => {
+export const CardProducts = ({ children, id }) => {
   const [isCardHover, setIsCardHover] = useState(false);
 
   return (
-    <div
-      className="p-3 flex flex-col gap-3 cursor-pointer"
-      id="product-card"
-      onMouseEnter={(e) => setIsCardHover(true)}
-      onMouseLeave={(e) => setIsCardHover(!isCardHover)}
-    >
-      {children}
-    </div>
+    <Link to={`/detailProduct/${id}`}>
+      <div
+        className="p-3 flex flex-col gap-3 cursor-pointer"
+        id="product-card"
+        onMouseEnter={(e) => setIsCardHover(true)}
+        onMouseLeave={(e) => setIsCardHover(!isCardHover)}
+      >
+        {children}
+      </div>
+    </Link>
   );
 };
 
-const Header = ({img}) => {
+const Header = ({ img }) => {
   return (
     <div id="product-header" className="w-full overflow-hidden">
       <img
@@ -45,15 +48,30 @@ const Body = ({ title, price, owner, isCardHover, handleAddToCart, id }) => {
                 id="product-btn"
                 className=" px-5 bg-blue-600 text-white font-normal py-1 flex"
               >
-              <span className="font-normal">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}</span>
+                <span className="font-normal">
+                  Rp{" "}
+                  {price.toLocaleString("id-ID", {
+                    styles: "currency",
+                    currency: "IDR",
+                  })}
+                </span>
               </button>
             ) : (
-              <h3 className=" font-bold text-stone-900">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})} </h3>
+              <h3 className=" font-bold text-stone-900">
+                Rp{" "}
+                {price.toLocaleString("id-ID", {
+                  styles: "currency",
+                  currency: "IDR",
+                })}{" "}
+              </h3>
             )}
           </div>
 
           <div className="flex justify-end w-full">
-            <button className=" cursor-pointer" onClick={() => handleAddToCart(id)}>
+            <button
+              className=" cursor-pointer"
+              onClick={() => handleAddToCart(id)}
+            >
               <ShoppingCartIcon />
             </button>
           </div>

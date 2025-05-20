@@ -78,7 +78,7 @@ export const Product = () => {
       <div className="grid grid-cols-2 mt-[8em] gap-5 px-5">
         <div className="grid gap-5 fragment-product-container">
           {dataProduk.map((item, i) => (
-            <CardProducts key={i}>
+            <CardProducts key={i} id={item.id}>
               <CardProducts.Header />
               <CardProducts.Body
                 title={item.title}

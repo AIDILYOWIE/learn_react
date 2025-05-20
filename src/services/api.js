@@ -5,6 +5,7 @@ const api = axios.create({
   headers: { Accept: "application/json" },
 });
 
+// auth
 export const loginService = async (data, callback) => {
   try {
     const res = await api.post("https://fakestoreapi.com/auth/login", data);
@@ -19,6 +20,8 @@ export const getUser = (token) => {
   return decoded.user;
 };
 
+
+// product
 export const getProducts = async () => {
   try {
     const res = await api.get("https://fakestoreapi.com/products");
@@ -27,3 +30,12 @@ export const getProducts = async () => {
     console.log(error);
   }
 };
+
+export const getDetailProduct = async (id, callback) => {
+    try {
+        const res = await api.get(`https://fakestoreapi.com/products/${id}`)
+        callback(true, res.data)
+    } catch(error) {
+        callback(false, error)
+    }
+}
