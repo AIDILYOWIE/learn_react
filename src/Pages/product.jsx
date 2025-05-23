@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import TableCart from "../Components/Fragments/TableCart";
 
 export const Product = () => {
-
   const dataProduk = [
     {
       id: 1,
@@ -21,8 +20,7 @@ export const Product = () => {
       owner: "Recof",
       price: 30000,
     },
-    {
-      id: 3,
+    { 
       title: "Machiato",
       owner: "Recof",
       price: 50000,
@@ -30,29 +28,27 @@ export const Product = () => {
   ];
 
   return (
-    <Navbar>
-      <div className="grid grid-cols-2 mt-[8em] gap-5 px-5">
-        <div className="grid gap-5 fragment-product-container">
-          {dataProduk.map((item, i) => (
-            <CardProducts key={i}>
-              <CardProducts.Header id={item.id}/>
-              <CardProducts.Body
-                title={item.title}
-                owner={item.title}
-                price={item.price}
-                id={item.id}
-              />
-            </CardProducts>
-          ))}
-        </div>
-        <div>
-          {" "}
-          <h1 className="text-3xl text-blue-600 font-bold">card</h1>
-          <ul className="mt-5">
-          <TableCart dataProduk={dataProduk}/>
-          </ul>
-        </div>
+    <div className="grid grid-cols-2 mt-[8em] gap-5 px-5">
+      <div className="grid gap-5 fragment-product-container">
+        {dataProduk.map((item, i) => (
+          <CardProducts key={i}>
+            <CardProducts.Header id={item.id} />
+            <CardProducts.Body
+              title={item.title}
+              owner={item.title}
+              price={item.price}
+              id={item.id}
+            />
+          </CardProducts>
+        ))}
       </div>
-    </Navbar>
+      <div>
+        {" "}
+        <h1 className="text-3xl text-blue-600 font-bold">card</h1>
+        <ul className="mt-5">
+          <TableCart dataProduk={dataProduk} />
+        </ul>
+      </div>
+    </div>
   );
 };

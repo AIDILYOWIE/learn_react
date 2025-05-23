@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../../css/navbar.css";
 import { useLogin } from "../../hooks/useLogin";
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
+import { DarkMode } from "../../Context/DarkModeContext";
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 
 const Navbar = ({ children }) => {
   const username = useLogin()
@@ -15,8 +18,8 @@ const Navbar = ({ children }) => {
   };
 
   const cart = useSelector((state) => state.cart.data)
-  console.log(cart)
-  
+
+  const {isDarkMode, setIsDarkMode} = useContext(DarkMode)
 
   return (
     <>
@@ -36,8 +39,10 @@ const Navbar = ({ children }) => {
             {cart.length}
           </Box>
         </div>
+        <div className="cursor-pointer text-white" onClick={() => setIsDarkMode(!isDarkMode)}>
+          {isDarkMode ? (<LightModeOutlinedIcon/>) : (<DarkModeOutlinedIcon/>)}
+        </div>
       </div>
-      {children}
     </>
   );
 };

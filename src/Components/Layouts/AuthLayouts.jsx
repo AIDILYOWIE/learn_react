@@ -1,14 +1,18 @@
-import { Children } from "react"
+import { Children, useContext } from "react"
 import { Link } from "react-router"
+import { DarkMode } from "../../Context/DarkModeContext"
 
 export const AuthLayouts = (props) => {
     const {children, title, type}  = props
+    const {isDarkMode, setIsDarkMode} = useContext(DarkMode)
+
+    const textDarkMode = !isDarkMode ? 'text-slate-500' : 'text-slate-300'
 
     return (
-        <div className="flex justify-center min-h-screen items-center">
+        <div className={`flex justify-center min-h-screen items-center ${isDarkMode && 'bg-blue-950'}`}>
         <div className="w-full max-w-xs text-center">
           <h1 className='text-3xl font-bold mb-2 text-blue-600'>{title}</h1>
-          <p className='font-medium text-slate-500'>
+          <p className={`font-medium ${textDarkMode}`}>
             welcome, please enter your details
           </p>
             {children}
