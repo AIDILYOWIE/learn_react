@@ -2,38 +2,39 @@ import { useState } from "react";
 import "../../css/product.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { Link } from "react-router";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
-export const CardProducts = ({ children, id }) => {
-  const [isCardHover, setIsCardHover] = useState(false);
+export const CardProducts = ({ children}) => {
 
   return (
+    <div
+      className="p-3 flex flex-col gap-3"
+      id="product-card"
+    >
+      {children}
+    </div>
+  );
+};
+
+const Header = ({ id }) => {
+  return (
     <Link to={`/detailProduct/${id}`}>
-      <div
-        className="p-3 flex flex-col gap-3 cursor-pointer"
-        id="product-card"
-        onMouseEnter={(e) => setIsCardHover(true)}
-        onMouseLeave={(e) => setIsCardHover(!isCardHover)}
-      >
-        {children}
+      <div id="product-header" className="w-full overflow-hidden cursor-pointer">
+        <img
+          src="https://img.freepik.com/premium-photo/iced-coffee-with-milk-glass-table-cafe_76440-4537.jpg?ga=GA1.1.1787885674.1746078993&semt=ais_hybrid&w=740"
+          width="100%"
+          height="100%"
+        />
       </div>
     </Link>
   );
 };
 
-const Header = ({ img }) => {
-  return (
-    <div id="product-header" className="w-full overflow-hidden">
-      <img
-        src="https://img.freepik.com/premium-photo/iced-coffee-with-milk-glass-table-cafe_76440-4537.jpg?ga=GA1.1.1787885674.1746078993&semt=ais_hybrid&w=740"
-        width="100%"
-        height="100%"
-      />
-      <div className="img-lens" style={{ display: "none" }} />
-    </div>
-  );
-};
+const Body = ({ title, price, owner, isCardHover, id }) => {
 
-const Body = ({ title, price, owner, isCardHover, handleAddToCart, id }) => {
+  const dispatch = useDispatch();
+
   return (
     <>
       <div className="w-full flex flex-col gap-1">
@@ -70,7 +71,7 @@ const Body = ({ title, price, owner, isCardHover, handleAddToCart, id }) => {
           <div className="flex justify-end w-full">
             <button
               className=" cursor-pointer"
-              onClick={() => handleAddToCart(id)}
+              onClick={() =>  dispatch(addToCart({ id: id, qty: 1 }))}
             >
               <ShoppingCartIcon />
             </button>
