@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { Button } from "../Elements/Button/Index";
 import { InputForm } from "../Elements/Input/Index";
 import { loginService } from "../../services/api";
 
 export const FormLogin = () => {
   const [message, setMessage] = useState("");
+
 
   const handleLogin = (e) => {
     e.preventDefault(); // e.preventDefault() digunakan agar browser tidak terefresh / tidak terender ulang
@@ -32,7 +33,6 @@ export const FormLogin = () => {
 
   return (
     <>
-
     <form action="" className=" text-start" onSubmit={handleLogin}>
       <InputForm
         label="Username"

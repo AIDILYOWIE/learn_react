@@ -1,13 +1,16 @@
 import { Table } from "@mui/material";
 import { useState, useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useTotalPrice,
+  useTotalPriceDispatch,
+} from "../../Context/TotalPriceContext";
 
 const TableCart = ({ dataProduk }) => {
   const cart = useSelector((state) => state.cart.data);
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  const totalPriceRef = useRef(null)
+  const totalPriceRef = useRef(null);
+  const dispatch = useTotalPriceDispatch();
+  const { totalPrice } = useTotalPrice();
 
   useEffect(() => {
     if (cart.length > 0) {
@@ -15,7 +18,12 @@ const TableCart = ({ dataProduk }) => {
         const product = dataProduk.find((product) => product.id == item.id);
         return acc + product.price * item.qty;
       }, 0);
-      setTotalPrice(sum);
+      dispatch({
+        type: "UPDATE",
+        payload: {
+          totalPrice: sum,
+        },
+      });
       localStorage.setItem("cart", JSON.stringify(cart));
     }
   }, [cart, dataProduk]);

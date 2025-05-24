@@ -7,15 +7,21 @@ import ReactDOM from "react-dom/client";
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import DarkModeContextProvider from "./Context/DarkModeContext";
+import { TotalPriceProvider } from "./Context/TotalPriceContext";
 import Navbar from "./Components/Layouts/NavbarLayouts";
+import DarkModeContextProvider from "./Context/DarkModeContext";
+import { FormProvider } from "./Context/formContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <DarkModeContextProvider>
-        <Navbar/>
-        <RouterProvider router={App} />
+        <TotalPriceProvider>
+          <Navbar></Navbar>
+          <FormProvider>
+            <RouterProvider router={App} />
+          </FormProvider>
+        </TotalPriceProvider>
       </DarkModeContextProvider>
     </Provider>
   </React.StrictMode>

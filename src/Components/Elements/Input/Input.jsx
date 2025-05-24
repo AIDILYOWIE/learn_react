@@ -1,7 +1,9 @@
 import { forwardRef } from "react";
+import { useForm } from "../../../Context/formContext";
 
 export const Input = forwardRef((props, ref) => {
   const { type, placeholder, name } = props;
+  const dispatch = useForm()
   return (
     <input
       type={type}
